@@ -99,25 +99,7 @@ df3.info()
 df3.shape
 
 
-# In[19]:
 
-
-from sklearn.model_selection import train_test_split
-
-
-# In[20]:
-
-
-
-
-
-# In[21]:
-
-
-X_test.shape , y_test.shape
-
-
-# In[22]:
 
 
 import os

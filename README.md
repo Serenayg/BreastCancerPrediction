@@ -41,7 +41,7 @@ Each model was implemented in a separate `.py` file for modular organization:
 
 ---
 
-### 🏆 Model Performance Summary  
+## 🏆 Model Performance Summary  
 
 | Algorithm | Test Accuracy | Confusion Matrix (TP, FN, FP, TN) |
 |------------|----------------|----------------------------------|

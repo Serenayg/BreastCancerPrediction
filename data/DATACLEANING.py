@@ -112,14 +112,4 @@ print(os.getcwd())
 df3.to_csv("/Users/serenaygoler/Breast_Cancer_Data.csv", index=False)
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 

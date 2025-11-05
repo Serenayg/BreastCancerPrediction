@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!doctype html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Breast Cancer Classifier — XGBoost&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: Arial, sans-serif; max-width: 760px; margin: 24px auto; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label { display:block; margin-top:10px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input { width: 220px; padding:6px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button { margin-top:16px; padding:8px 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pred { margin-top:16px; font-weight:bold; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;Breast Cancer Prediction (XGBoost)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;form action="/predict" method="post"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Clump_thickness &lt;input name="Clump_thickness" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Uniformity_of_cell_size &lt;input name="Uniformity_of_cell_size" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Uniformity_of_cell_shape &lt;input name="Uniformity_of_cell_shape" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Marginal_adhesion &lt;input name="Marginal_adhesion" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Single_epithelial_cell_size &lt;input name="Single_epithelial_cell_size" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Bare_nuclei &lt;input name="Bare_nuclei" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Bland_chromatin &lt;input name="Bland_chromatin" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Normal_nucleoli &lt;input name="Normal_nucleoli" type="number" step="1" min="1" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Mitoses &lt;input name="Mitoses" type="number" step="1" min="0" max="10" required&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button type="submit"&gt;Predict&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>{% if pred is defined %}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="pred"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>Result: {{ 'Malignant (1)' if pred==1 else 'Benign (0)' }}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{% if proba is defined %} — Probability (class=1): {{ proba }}{% endif %}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{% endif %}</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

@@ -12,19 +12,19 @@ jobs:
       - name: Checkout (full history)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # <-- shallow değil
+          fetch-depth: 0  
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install deps (optional - test/build aşaması yapıyorsan)
+      - name: Install deps 
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Ensure not shallow (safety)
+      - name: Ensure not shallow 
         run: |
           git fetch --all --prune
           git rev-parse --is-shallow-repository && git fetch --unshallow || echo "Already unshallowed"

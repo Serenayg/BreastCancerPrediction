@@ -2,30 +2,31 @@ name: Deploy to Heroku
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: .python-version
-
-      - name: Install dependencies
+      - name: Show tree (debug)
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pwd
+          ls -la
+          echo "--- Prediction ---"
+          ls -la Prediction || true
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.13.15
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: breast-deploy-github-120394
-          heroku_email: s.goler3012@student.nu.edu
-          usedocker: false
+
+      - name: Push to Heroku via Git
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: s.goler3012@student.nu.edu
+        run: |
+          git config user.email "s.goler3012@student.nu.edu"
+          git config user.name "github-actions[bot]"
+          git remote remove heroku 2>/dev/null || true
+          git remote add heroku https://heroku:${HEROKU_API_KEY}@git.heroku.com/breast-cancer-deploy.git
+          git push heroku HEAD:main -f

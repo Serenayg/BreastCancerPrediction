@@ -2,28 +2,36 @@ name: Deploy to Heroku
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout (full history)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # <-- shallow değil
 
-      - name: Show tree (debug)
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps (optional - test/build aşaması yapıyorsan)
         run: |
-          pwd
-          ls -la
-          echo "--- Prediction ---"
-          ls -la Prediction || true
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
+      - name: Ensure not shallow (safety)
+        run: |
+          git fetch --all --prune
+          git rev-parse --is-shallow-repository && git fetch --unshallow || echo "Already unshallowed"
 
-      - name: Push to Heroku via Git
+      - name: Push to Heroku (Git deploy)
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_EMAIL: s.goler3012@student.nu.edu
         run: |
           git config user.email "s.goler3012@student.nu.edu"
           git config user.name "github-actions[bot]"
